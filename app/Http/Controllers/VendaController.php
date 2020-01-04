@@ -18,7 +18,7 @@ class VendaController extends Controller
     {
         $vendas = $this->model->all();
 
-        if (count($servicos) == 0)
+        if (count($vendas) == 0)
             return response()->json(['message' => 'nao existem vendas no sistema']);
         
         return response()->json($vendas);

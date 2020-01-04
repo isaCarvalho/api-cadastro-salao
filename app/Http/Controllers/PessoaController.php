@@ -18,15 +18,17 @@ class PessoaController extends Controller
     {
         $pessoas = $this->model->all();
 
-        if (count($pessoas) > 0)
-            return response()->json($pessoas);
-        else
-            return response()->json([]);
+        if (count($pessoas) == 0)
+            return response()->json(['message' => 'nao existem pessoas cadastradas no sistema']);
+            
+        return response()->json($pessoas);
     }
 
     public function getById($id)
     {
         $pessoa = $this->model->find($id);
+        if ($pessoa == null)
+            return response()->json(['message' => 'pessoa nao encontrada']);
 
         return response()->json($pessoa);
     }
@@ -41,6 +43,8 @@ class PessoaController extends Controller
     public function update($id, Request $request)
     {
         $pessoa = $this->model->find($id)->update($request->all());
+        if ($pessoa == null)
+            return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada']);
 
         return response()->json($pessoa);
     }

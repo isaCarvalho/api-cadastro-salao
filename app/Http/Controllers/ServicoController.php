@@ -18,15 +18,17 @@ class ServicoController extends Controller
     {
         $servicos = $this->model->all();
 
-        if (count($servicos) > 0)
-            return response()->json($servicos);
-        else
-            return response()->json([]);
+        if (count($servicos) == 0)
+            return response()->json(['message' => 'nao existem servicos no sistema']);
+
+        return response()->json($servicos);
     }
 
     public function getById($id)
     {
         $servico = $this->model->find($id);
+        if ($servico == null)
+            return response()->json(['message' => 'servico nao encontrado']);
         
         return response()->json($servico);
     }
@@ -41,6 +43,8 @@ class ServicoController extends Controller
     public function update($id, Request $request)
     {
         $servico = $this->model->find($id)->update($request->all());
+        if ($servico == null)
+            return response()->json(['message' => 'nao foi possivel atualizar. Servico nao encontrado']);
 
         return response()->json($servico);
     }
@@ -48,6 +52,8 @@ class ServicoController extends Controller
     public function delete($id)
     {
         $servico = $this->model->find($id)->delete();
+        if ($servico == null)
+            return response()->json(['message' => 'nao foi possivel apagar. Servico nao encontrado']);
 
         return response()->json([]);
     }

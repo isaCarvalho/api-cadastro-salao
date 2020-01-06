@@ -19,40 +19,40 @@ class PessoaController extends Controller
         $pessoas = $this->model->all();
 
         if (count($pessoas) == 0)
-            return response()->json(['message' => 'nao existem pessoas cadastradas no sistema']);
+            return response()->json(['message' => 'nao existem pessoas cadastradas no sistema'], 404);
             
-        return response()->json($pessoas);
+        return response()->json($pessoas, 200);
     }
 
     public function getById($id)
     {
         $pessoa = $this->model->find($id);
         if ($pessoa == null)
-            return response()->json(['message' => 'pessoa nao encontrada']);
+            return response()->json(['message' => 'pessoa nao encontrada', 404]);
 
-        return response()->json($pessoa);
+        return response()->json($pessoa, 200);
     }
 
     public function insert(Request $request)
     {
         $pessoa = Pessoa::create($request->all());
 
-        return response()->json($pessoa);
+        return response()->json($pessoa, 200);
     }
 
     public function update($id, Request $request)
     {
         $pessoa = $this->model->find($id)->update($request->all());
         if ($pessoa == null)
-            return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada']);
+            return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada'], 500);
 
-        return response()->json($pessoa);
+        return response()->json($pessoa, 200);
     }
 
     public function delete($id)
     {
         $pessoa = $this->model->find($id)->delete();
 
-        return response()->json([]);
+        return response()->json([], 200);
     }
 }

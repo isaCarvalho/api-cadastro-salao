@@ -20,7 +20,7 @@ class FuncionarioController extends Controller
             $funcionario = Funcionario::where('email', $request->input('email'))->first();
 
             if ($funcionario == null)
-                return response()->json(['message', 'email incorreto!']);
+                return response()->json(['message', 'email incorreto!'], 500);
 
             if ($request->input('senha') == $funcionario->password)
             {
@@ -29,14 +29,14 @@ class FuncionarioController extends Controller
                     'email' => $funcionario->email,
                     'senha' => $funcionario->password,
                     'nome' => $funcionario->name
-                ]);
+                ], 200);
             }
 
-            return response()->json(['message' => 'senha incorreta!']);
+            return response()->json(['message' => 'senha incorreta!'], 500);
         } 
         catch(ValidationException $e)
         {
-            return response()->json(['erro' => 'erro ao validar os dados']);
+            return response()->json(['erro' => 'erro ao validar os dados'], 500);
         }
     }
 }

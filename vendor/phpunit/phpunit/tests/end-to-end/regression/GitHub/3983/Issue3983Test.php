@@ -7,8 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-if (\PHP_SAPI !== 'cli' && \PHP_SAPI !== 'phpdbg') {
-    exit(1);
-}
+use PHPUnit\Framework\TestCase;
 
-eval('?>' . \file_get_contents('php://stdin'));
+final class Issue3983Test extends TestCase
+{
+    public function testOne(): void
+    {
+        $this->assertTrue(true);
+    }
+}

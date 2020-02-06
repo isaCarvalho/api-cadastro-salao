@@ -20,7 +20,7 @@ class PessoaController extends Controller
 
         if (count($pessoas) == 0)
             return response()->json(['message' => 'nao existem pessoas cadastradas no sistema'], 404);
-            
+
         return response()->json($pessoas, 200);
     }
 
@@ -44,7 +44,7 @@ class PessoaController extends Controller
     {
         $pessoa = $this->model->find($id)->update($request->all());
         if ($pessoa == null)
-            return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada'], 500);
+            return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada'], 404);
 
         return response()->json($pessoa, 200);
     }

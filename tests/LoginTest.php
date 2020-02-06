@@ -9,9 +9,15 @@ class LoginTest extends TestCase
      */
     public function testLogin()
     {
-        $this->post('/login', [
+        $funcionario = factory('App\Funcionario')->create([
+            'name' => 'Isabela Carvalho',
             'email' => 'isabelasc@id.uff.br',
-            'senha' => '123456'
+            'password' => '123456'
+        ]);
+
+        $this->actingAs($funcionario)->post('/login', [
+            'email' => $funcionario->email,
+            'senha' => $funcionario->password
         ]);
 
         $this->assertEquals(

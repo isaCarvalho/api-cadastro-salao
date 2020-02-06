@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Funcionario;
+use Illuminate\Support\Facades\Auth;
 
 class FuncionarioController extends Controller
 {
@@ -20,7 +21,7 @@ class FuncionarioController extends Controller
             $funcionario = Funcionario::where('email', $request->input('email'))->first();
 
             if ($funcionario == null)
-                return response()->json(['message', 'email incorreto!'], 500);
+                return response()->json(['message', 'email incorreto!'], 403);
 
             if ($request->input('senha') == $funcionario->password)
             {
@@ -32,8 +33,8 @@ class FuncionarioController extends Controller
                 ], 200);
             }
 
-            return response()->json(['message' => 'senha incorreta!'], 500);
-        } 
+            return response()->json(['message' => 'senha incorreta!'], 403);
+        }
         catch(ValidationException $e)
         {
             return response()->json(['erro' => 'erro ao validar os dados'], 500);

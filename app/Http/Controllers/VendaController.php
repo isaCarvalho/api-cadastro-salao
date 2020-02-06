@@ -19,8 +19,8 @@ class VendaController extends Controller
         $vendas = $this->model->all();
 
         if (count($vendas) == 0)
-            return response()->json(['message' => 'nao existem vendas no sistema']);
-        
+            return response()->json(['message' => 'nao existem vendas no sistema'], 404);
+
         return response()->json($vendas);
     }
 
@@ -28,8 +28,8 @@ class VendaController extends Controller
     {
         $venda = $this->model->find($id);
         if ($venda == null)
-            return response()->json(['message' => 'venda nao encontrada']);
-        
+            return response()->json(['message' => 'venda nao encontrada'], 404);
+
         return response()->json($venda);
     }
 
@@ -44,7 +44,7 @@ class VendaController extends Controller
     {
         $venda = $this->model->find($id)->update($request->all());
         if ($venda == null)
-            return response()->json(['message' => 'nao foi possivel atualizar. Venda nao encontrada']);
+            return response()->json(['message' => 'nao foi possivel atualizar. Venda nao encontrada'], 404);
 
         return response()->json($venda);
     }
@@ -53,7 +53,7 @@ class VendaController extends Controller
     {
         $venda = $this->model->find($id)->delete();
         if ($venda == null)
-            return response()->json(['message' => 'nao foi possivel excluir. Venda nao encontrada']);
+            return response()->json(['message' => 'nao foi possivel excluir. Venda nao encontrada'], 404);
 
         return response()->json([]);
     }

@@ -5,7 +5,7 @@ $router->get('', function()
     return json_encode(["message" => "Bem vindo a api do salao!"]);
 });
 
-$router->post('login', "FuncionarioController@authenticate");
+$router->post('/login', "FuncionarioController@authenticate");
 
 $router->get('/pessoas', "PessoaController@getAll");
 

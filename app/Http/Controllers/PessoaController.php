@@ -35,7 +35,12 @@ class PessoaController extends Controller
 
     public function insert(Request $request)
     {
-        $pessoa = Pessoa::create($request->all());
+        $pessoa = Pessoa::create([
+          "primeiro_nome" => $request["primeiro_nome"],
+          "sobrenome" => $request["sobrenome"],
+          "email" => $request["email"],
+          "senha" => $request["senha"]
+        ]);
 
         return response()->json($pessoa, 200);
     }

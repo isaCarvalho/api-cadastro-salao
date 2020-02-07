@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        "App\Console\Commands\TestCron",
+        "App\Console\Commands\InsertCron"
     ];
 
     /**
@@ -24,6 +25,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //
+        $schedule->command("Inspire") // primeiro cron job
+          ->hourly();
+
+        $schedule->command("insert:cron {pessoa*}") // cron job que insere uma pessoa no banco
+          ->daily();
+
+        $schedule->call(function () {
+          print("That's me again"); // esse é um cron job de teste
+        })->everyFiveMinutes();
     }
 }

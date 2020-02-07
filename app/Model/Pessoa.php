@@ -11,9 +11,9 @@ class Pessoa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'primeiro_nome',
-        'sobrenome',
-        'email',
-        'senha'
+        "primeiro_nome",
+        "sobrenome",
+        "email",
+        "senha"
     ];
 }

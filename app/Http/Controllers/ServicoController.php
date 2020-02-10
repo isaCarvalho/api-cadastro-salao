@@ -49,6 +49,20 @@ class ServicoController extends Controller
         return response()->json($servico);
     }
 
+    public function updatePrice()
+    {
+        $servicos = $this->model->all();
+        if ($servicos == null)
+            return response()->json(['message' => 'nao foi possivel atualizar. Servico nao encontrado'], 404);
+
+        foreach ($servicos as $servico) {
+            $servico->preco += 1;
+            $servico->save();
+        }
+
+        return response()->json($servicos);
+    }
+
     public function delete($id)
     {
         $servico = $this->model->find($id)->delete();

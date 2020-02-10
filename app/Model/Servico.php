@@ -12,6 +12,7 @@ class Servico extends Model
 
     protected $fillable = [
         'nome',
-        'preco'
+        'preco',
+        'data_vencimento'
     ];
 }

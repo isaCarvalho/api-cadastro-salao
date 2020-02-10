@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         "App\Console\Commands\TestCron",
-        "App\Console\Commands\InsertCron"
+        "App\Console\Commands\InsertCron",
+        "App\Console\Commands\PriceUpdateCron"
     ];
 
     /**
@@ -34,5 +35,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
           print("That's me again"); // esse é um cron job de teste
         })->everyFiveMinutes();
+
+        $schedule->command("update:cron")
+          ->daily();
     }
 }

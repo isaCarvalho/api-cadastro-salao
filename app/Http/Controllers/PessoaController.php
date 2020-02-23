@@ -35,6 +35,13 @@ class PessoaController extends Controller
 
     public function insert(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required',
+            'senha' => 'required'
+        ], [
+          'required' => 'O campo :attribute é obrigatório!'
+        ]);
+
         $pessoa = Pessoa::create([
           "primeiro_nome" => $request["primeiro_nome"],
           "sobrenome" => $request["sobrenome"],
@@ -47,6 +54,11 @@ class PessoaController extends Controller
 
     public function update($id, Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required',
+            'senha' => 'required'
+        ]);
+
         $pessoa = $this->model->find($id)->update($request->all());
         if ($pessoa == null)
             return response()->json(['message' => 'nao foi possivel atualizar. Pessoa nao encontrada'], 404);

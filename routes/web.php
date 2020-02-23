@@ -9,7 +9,7 @@ $router->post('/login', "FuncionarioController@authenticate");
 
 $router->get('/pessoas', "PessoaController@getAll");
 
-$router->group(["prefix" => "/pessoa", 'middleware' => 'auth'], function() use ($router){
+$router->group(["prefix" => "/pessoa"], function() use ($router){
     $router->get('/{id}', "PessoaController@getById");
     $router->post('/', "PessoaController@insert");
     $router->put('/{id}', "PessoaController@update");
